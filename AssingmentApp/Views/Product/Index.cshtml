@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Products>
+
+
+
+@{
+    ViewData["Title"] = "Product List";
+}
+<h3>@ViewData["Title"]</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary btn-sm">Create New Product</a>
+</p>
+<table class="table table-bordered table-responsive table-hover">
+<thread>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.CategoryName)
+        </th>
+        <th>Action</th>
+    </tr>
+</thread>
+
+
+<tbody>
+     @if (Model != null && Model.Any()) 
+    { 
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(Model => Model.ProductId)
+                </td>
+                <td>
+                 @Html.DisplayFor(Model =>product
+                     .ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => product.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => product.CategoryName)
+                </td>
+
+                <td><a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-success btn-sm">Edit</a>
+
+                    <td><a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+            </tr>
+            
+         } 
+
+    }
+    else
+    {
+        <tr>
+            <td colspan="5">
+                    <div> product not available in database.</div>
+                </td>
+            </tr>
+
+    }
+
+</tbody>
+</table>
+
